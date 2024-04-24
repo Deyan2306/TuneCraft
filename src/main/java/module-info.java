@@ -7,6 +7,9 @@ module d4rk.c47.car_usb_formatter_app {
     requires net.synedra.validatorfx;
     requires org.kordamp.ikonli.javafx;
     requires eu.hansolo.tilesfx;
+    requires static lombok;
+    requires org.jsoup;
+    requires java.youtube.downloader;
 
     opens d4rk.c47.tunecraft to javafx.fxml;
     exports d4rk.c47.tunecraft;
