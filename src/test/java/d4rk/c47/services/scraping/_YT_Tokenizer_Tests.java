@@ -1,18 +1,20 @@
 package d4rk.c47.services.scraping;
 
 
-import d4rk.c47.tunecraft.services.scraping._YT_Scraper;
+import d4rk.c47.tunecraft.services.scraping._YT_Tokenizer;
 import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
 
-public class _YT_Scraper_Tests {
+public class _YT_Tokenizer_Tests {
+
+    private _YT_Tokenizer tokenizer = new _YT_Tokenizer();
 
     @Test
     void testBaseCaseExtractToken() {
         String testUrl = "https://www.youtube.com/watch?v=T0k3n";
         String testUrlToken = "T0k3n";
 
-        String token = _YT_Scraper.getVideoId(testUrl);
+        String token = tokenizer.getVideoId(testUrl);
 
         assertEquals(testUrlToken, token);
     }
@@ -22,7 +24,7 @@ public class _YT_Scraper_Tests {
         String testUrl = "https://www.youtube.com/watch?v=T0k3n&list=1is7&start_radio=1";
         String testUrlToken = "T0k3n";
 
-        String token = _YT_Scraper.getVideoId(testUrl);
+        String token = tokenizer.getVideoId(testUrl);
 
         assertEquals(testUrlToken, token);
     }
@@ -32,7 +34,7 @@ public class _YT_Scraper_Tests {
         String testUrl = "https://www.youtube.com/embed/T0k3n";
         String testUrlToken = "T0k3n";
 
-        String token = _YT_Scraper.getVideoId(testUrl);
+        String token = tokenizer.getVideoId(testUrl);
 
         assertEquals(testUrlToken, token);
     }
@@ -42,7 +44,7 @@ public class _YT_Scraper_Tests {
         String testUrl = "https://youtu.be/T0k3n";
         String testUrlToken = "T0k3n";
 
-        String token = _YT_Scraper.getVideoId(testUrl);
+        String token = tokenizer.getVideoId(testUrl);
 
         assertEquals(testUrlToken, token);
     }
@@ -52,7 +54,7 @@ public class _YT_Scraper_Tests {
         String testUrl = "https://youtu.be/T0k3n?list=l157";
         String testUrlToken = "T0k3n";
 
-        String token = _YT_Scraper.getVideoId(testUrl);
+        String token = tokenizer.getVideoId(testUrl);
 
         assertEquals(testUrlToken, token);
     }
@@ -62,7 +64,7 @@ public class _YT_Scraper_Tests {
         String testUrl = "https://www.youtube.com/watch?v=&list=1is7&start_radio=1";
 
         assertThrows(IllegalArgumentException.class, () -> {
-            _YT_Scraper.getVideoId(testUrl);
+            tokenizer.getVideoId(testUrl);
         });
     }
 
@@ -71,7 +73,7 @@ public class _YT_Scraper_Tests {
         String testUrl = "https://www.youtube.com/†oken";
 
         assertThrows(IllegalArgumentException.class, () -> {
-            _YT_Scraper.getVideoId(testUrl);
+            tokenizer.getVideoId(testUrl);
         });
     }
 }
